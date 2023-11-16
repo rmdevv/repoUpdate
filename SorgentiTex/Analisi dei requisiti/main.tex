@@ -1,0 +1,98 @@
+\documentclass[10pt, a4paper]{article}
+
+\input{parameters}
+
+\usepackage{style}
+\usepackage{headerfooter}
+
+\title{\titolo}
+\author{SWEetCode}
+
+\begin{document}
+
+% PRIMA PAGINA
+\include{firstpage}
+
+% REGISTRO DELLE VERSIONI
+\include{registroversioni}
+\newpage
+
+% INDICE
+\tableofcontents
+\newpage
+
+% INTRODUZIONE
+\section{Introduzione}
+\subsection{Scopo del documento}
+Il documento ha lo scopo di definire i casi d'uso dell'applicazione che verrà sviluppata nel corso del progetto. Vengono inoltre presentati i requisiti funzionali, di qualità e di vincolo e le funzionalità aggiuntive che saranno implementate non essendo ritenute essenziali/necessarie.
+\\
+%\subsection{Scopo del prodotto}
+\subsection{Glossario}
+Per evitare ambiguità e incomprensioni relative al linguaggio e ai termini utilizzati nella documentazione relativa al progetto viene presentato un Glossario. I termini ambigui o specifici presenti nello stesso, verranno identificati con un pedice |g|. (DA VALUTARE COME RICONOSCERE IL TERMINE )
+\\
+\subsection{Riferimenti}
+   \subsubsection{Riferimenti normativi}
+   \begin{itemize}
+    \item \textit{Regolamento del progetto didattico}: \\
+    \href{https://www.math.unipd.it/~tullio/IS-1/2023/Dispense/PD2.pdf}{https://www.math.unipd.it/~tullio/IS-1/2023/Dispense/PD2.pdf};
+    \item \textit{Norme di progetto v0.4.3}.
+    \end{itemize}
+    
+    \subsubsection{Riferimenti informativi}
+    
+    \begin{itemize}
+    \item \textit{Glossario v0.0.1} (da creare parallelamente); 
+    \item \textit{Presentazione capitolato C1}:\\
+    \href{https://www.math.unipd.it/~tullio/IS-1/2023/Progetto/C1.pdf}{https://www.math.unipd.it/~tullio/IS-1/2023/Progetto/C1.pdf};
+    \item \textit{Verbali esterni ed interni};
+    \item \textit{Analisi e descrizione delle funzionalità: Use Case e relativi diagrammi (UML):}\\
+    \href{https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi%20Use%20Case.pdf}{https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi\%20Use\%20Case.pdf ;}
+    \item \textit{Analisi e descrizione delle funzionalità: Diagrammi delle Attività (UML):}\\
+    \href{https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi%20di%20Attivit%C3%A0.pdf}{https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi\%20di\%20Attivit\%C3\%A0.pdf;}
+    
+
+    \item \textit{Progettazione e Programmazione: Diagrammi delle Classi:}\\
+    \href{https://www.math.unipd.it/~rcardin/swea/2023/Diagrammi%20delle%20Classi.pdf}{https://www.math.unipd.it/~rcardin/swea/2023/Diagrammi\%20delle\%20Classi.pdf.}
+    \end{itemize}
+    
+% DESCRIZIONE
+\newpage
+\section{Descrizione}
+\subsection{Obiettivi del prodotto}
+Il proponente richiede la creazione di un sito web , dotato di un componente di intelligenza artificiale , che sia d'aiuto a tutto il personale dell'azienda .
+In particolare , il sistema deve rendere accessibili le informazioni, le regolamentazioni e le indicazioni aziendali ai dipendenti.
+Deve fornire nuove modalità di formazione e assistenza sul lavoro .
+Deve poter superare i limiti di un classico repository documentale . Rendendo le informazioni più fruibili , concentrandosi più sui contenuti , che sulla struttura .
+Il sistema deve riuscire a comunicare con i lavoratori in modo semplice , qualsiaisi persona , anche la meno esperta ,riguardo moderne tecnologie , deve riuscire a comunicare con esso .
+Infine , deve riuscire a migliorare il comportamento dei lavoratori , facendo in modo che rispettino le regole .
+\subsection{Funzioni del prodotto}
+Il software deve essere in grado di ricevere in input documenti di qualsiasi natura , in particolare pdf , documenti fatti con word , con la quale possa rispondere a qualsiasi domanda che gli sottoponga il lavoratore . 
+\subsection{Caratteristiche del prodotto}
+Il sistema deve poter aver accesso a tutti i file che riguardino la produttività aziendale , non può rispondere simultaneamente a più utenti , può gestirne uno alla volta e deve poter conoscere l'italiano e l'inglese . I documenti caricati devono poter rimanere accessibili ed inoltre deve esserci una storia della comunicazione tra ogni lavoratore ed esso . Inoltre deve aver meccanismi riguardanti l'autenticazione di un generico lavoratore .
+\subsection{Utenti}
+Gli utenti possono interagire con il sistema unicammente attraverso un'interfaccia e non possono assolutamente andare a vedere i file che il sistema gestisce . L'utente può chiedere informazioni riguardo dove si trovino le informazioni che gli interessano . Se l'utente chiede al sistema informazioni , non pertinenti , il sistema può e deve farlo notare .
+
+% CASI D'USO
+\newpage
+\section{Casi d'uso}
+
+\subsection{Obiettivi}
+La seguente sezione ha l'obiettivo di presentare i diversi Casi d'Uso relativi all'applicazione \textit{Knowledge Managment AI}. Essi sono indicati con la notazione seguente: \\ UC.[X].[Y] \ \  in cui:
+\begin{itemize}
+\item UC sta per \textit{Use Case};
+\item .[X] indica il numero del Caso d'Uso, presentati secondo successione gerarchica;
+\item .[Y] indica il possibile numero del sotto-Caso d'uso, che aggiunge informazioni al Caso d'Uso [X]. Anche i sotto-Casi d'Uso sono presentati secondo successione gerarchica.
+\end{itemize}
+
+\subsection{Attori}
+L'applicazione \textit{Knowledge Managment AI} richiede un singolo attore che rappresenta l'utente (ovvero il dipendente aziendale) che interagisce con il ChatBot. \\ Si specifica che l'azienda proponente non richiede l'autenticazione degli utenti nell'applicazione, poichè rappresenterebbe un rallentamento alla divulgazione rapida e semplice di documenti all'interno della rete aziendale; Per questo motivo l'autenticazione non viene presentata tra i requisiti.
+\subsection{Lista dei casi d'uso}
+\begin{itemize}
+    \item 
+\end{itemize}
+
+
+
+
+
+\end{document}
