@@ -21,7 +21,7 @@ jobs:
       - name: Delete latest tag if PR is not merged
         if: github.event.pull_request.merged == false
         run: |
-          git tag -d ${{ steps.get-latest-tag.outputs.tag }}
+          git tag -d '${{ steps.get-latest-tag.outputs.tag }}'
           git push origin :refs/tags/${{ steps.get-latest-tag.outputs.tag }}
 
       - name: Get tag message
