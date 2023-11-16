@@ -22,7 +22,7 @@ jobs:
         if: github.event.pull_request.merged == false
         run: |
           git tag -d '${{ steps.get-latest-tag.outputs.tag }}'
-          git push origin :refs/tags/${{ steps.get-latest-tag.outputs.tag }}
+          git push origin ':refs/tags/${{ steps.get-latest-tag.outputs.tag }}'
 
       - name: Get tag message
         if: github.event.pull_request.merged == true
