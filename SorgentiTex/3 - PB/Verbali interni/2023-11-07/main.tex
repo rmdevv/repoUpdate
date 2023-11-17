@@ -1,0 +1,109 @@
+\documentclass[10pt, a4paper]{article}
+
+\input{parameters}
+
+\usepackage{style}
+\usepackage{headerfooter}
+
+\title{\data}
+\author{SWEetCode}
+
+\begin{document}
+
+% PRIMA PAGINA
+\include{firstpage}
+
+% INIZIO PAGINE
+\setlength{\parindent}{0mm}
+\columnratio{0.31}
+\setlength{\columnsep}{2.2em}
+\setlength{\columnseprule}{4pt}
+\colseprulecolor{lightcol}
+\begin{paracol}{2}
+
+% 11111111111111111111111111111111111111111111111111111111111111111111111111111
+
+\intestazione
+\vspace{11.2em}
+
+\partecipanti
+
+\newpage
+
+\switchcolumn
+\revisioneAzioni
+\vspace{15.9em}
+
+\ordineGiorno
+
+\newpage
+
+% 22222222222222222222222222222222222222222222222222222222222222222222222222222
+
+\switchcolumn
+
+\heading{Discussione}\\
+\textbf{Sintesi degli argomenti\\discussi}
+
+\vspace{16.6cm}
+
+\newpage
+% ~\newpage
+% ~ \\\\\\~
+
+\heading{Decisioni}\\
+\textbf{Decisioni prese durante\\la discussione}
+
+\switchcolumn
+
+\discussione
+
+\newpage
+\decisioni
+
+\end{paracol}
+
+\newpage
+
+\heading{Azioni da Intraprendere}
+
+{\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{c|X|c|c|c}
+\textbf{ID Issue} & \textbf{Azione} & \textbf{Incaricato} & \textbf{Revisore} & \textbf{Scadenza} \\
+\hline 
+\#27 & Aggiornamento \textit{issue} id e voce "motivazioni" nei documenti  & Bresolin G. & Campese M. & $2023-11-8$ \\
+\hline
+\#28 & Fix file di Candidatura & Campese M. & Feltrin E. & $2023-11-8$ \\
+\hline
+\#30 & Stesura verbale interno $2023-11-07$ & Orlandi G. & Campese M. & $2023-11-9$ \\
+\hline 
+- & Contattare AzzurroDigitale per mail & Feltrin E. & Ciriolo I. & $2023-11-9$ \\
+\hline
+\#32 & Aggiornamento template documenti con parametrizzazione  &  Michelon R. & Campese M. & $2023-11-9$ \\
+\hline
+- & Preparazione per il meeting con AzzurroDigitale  & \quantities{Ciriolo I.\\Feltrin E.} & Team & $2023-11-9$ \\
+\hline
+\#31 & PowerPoint diario di bordo 2023-11-13 & Feltrin E. & Campese M. & $2023-11-12$ \\
+\hline
+\#26 & Aggiornamento Branch \ \ \  Protection Rules & \quantities{Bresolin G. \\Michelon R.} & Campese M. & $2023-11-13$ \\
+\hline
+\#33 & Aggiunta template \textit{issue} & Michelon R. & Campese M. & $2023-11-13$ \\
+\hline
+\#36 & Aggiornamento Norme di progetto & Bresolin G. & Campese M. & $2023-11-13$ \\
+\hline
+\#34 & Semantic-release action & \quantities{Dugo A. \\ Michelon R.} & Campese M. & $2023-11-16$ \\
+\hline
+\#33 & Creazione template issue & Michelon R. & Campese M. & $2023-11-20$\\
+\end{tabularx}}
+
+
+
+\vspace{3em}
+
+\heading{Altro}
+
+\textbf{Prossima Riunione}
+
+Non è stata fissata una data per una nuova riunione.
+
+\end{document}
