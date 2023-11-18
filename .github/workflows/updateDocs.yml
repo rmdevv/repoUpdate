@@ -1,0 +1,42 @@
+name: Compile LaTeX and Push PDF
+
+on:
+  push:
+    paths:
+      - 'SorgentiTex/**/*.tex'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up LaTeX environment
+      uses: xu-cheng/latex-action@v2
+      with:
+        root_file: ${{ github.event.before }}..${{ github.event.after }}/main.tex
+        builder: latexmk
+        args: -pdfxe
+
+    - name: Compile LaTeX
+      run: latexmk
+
+    - name: Get parent folder name
+      id: get_folder_name
+      run: echo "::set-output name=folder_name::$(basename $(dirname ${{ github.event.before }}..${{ github.event.after }}/main.tex))"
+
+    - name: Copy and Rename PDF to root
+      run: |
+        cp build/main.pdf ${{ github.workspace }}/${{ steps.get_folder_name.outputs.folder_name }}.pdf
+
+    - name: Push changes
+      uses: ad-m/github-push-action@v0.7.0
+      with:
+        branch: ${{ github.head_ref }}
+        force: true
+        directory: /SorgentiTex
+      env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+        
