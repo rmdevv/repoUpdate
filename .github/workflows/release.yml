@@ -23,36 +23,38 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Get UpdateVers Script
-        run: echo "${{ secrets.UPDATE_VERS_SCRIPT }}" > updateVers.py
-        shell: bash
-
-      - name: Update Version
-        run: |
-          output=$(python updateVers.py ${{ steps.get-latest-tag.outputs.tag }})
-          echo "::set-output name=nexttag::$output"
-        id: create-next-tag
-
       - name: Get PR title
         run: |
           PR_TITLE=$(curl -sSL https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }} | jq -r '.title')
           echo "PR_TITLE=$PR_TITLE" >> $GITHUB_ENV
+
+      - name: Get UpdateVers Script
+        run: echo "${{ vars.UPDATE_VERS_SCRIPT }}" > updateVers.py
+        shell: bash
+
+      - name: Update Version
+        run: |
+          NEW_VERS=$(python updateVers.py '${{ steps.get-latest-tag.outputs.tag }}' '${{ env.PR_TITLE }}')
+          echo "NEW_VERS=$NEW_VERS" >> $GITHUB_ENV
+        id: create-next-tag
 
       - name: Get Commit SHA of Merged PR
         run: |
           PR_MERGE_SHA=$(curl -sSL https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/merge | jq -r '.sha')
           echo "PR_MERGE_SHA=$PR_MERGE_SHA" >> $GITHUB_ENV
 
+        # GITHUB_SHA
+
       - name: Create Tag
         run: |
-          git tag -f -a ${{ steps.create-next-tag.outputs.nexttag }} $PR_MERGE_SHA
-          git push -f origin ${{ steps.create-next-tag.outputs.nexttag }}
+          git tag -f -a '${{ env.NEW_VERS }}' '${{ env.PR_MERGE_SHA }}'
+          git push -f origin '${{ env.NEW_VERS }}'
 
       - name: Create release
         uses: actions/create-release@v1
         with:
-          tag_name: ${{ steps.create-next-tag.outputs.nexttag }}
-          release_name: ${{ steps.create-next-tag.outputs.nexttag }}
+          tag_name: ${{ env.NEW_VERS }}
+          release_name: ${{ env.NEW_VERS }}
           body: ${{ env.PR_TITLE }}
           draft: false
         env:
