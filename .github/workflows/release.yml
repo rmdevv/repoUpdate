@@ -21,7 +21,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: '3.12'
 
       - name: Get PR title
         run: |
@@ -43,10 +43,10 @@ jobs:
           PR_MERGE_SHA=$(curl -sSL https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/merge | jq -r '.sha')
           echo "PR_MERGE_SHA=$PR_MERGE_SHA" >> $GITHUB_ENV
 
-        # GITHUB_SHA
-
       - name: Create Tag
         run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
           git tag -f -a '${{ env.NEW_VERS }}' '${{ github.sha }}' -m 'Creato tag.'
           git push -f origin '${{ env.NEW_VERS }}'
 
