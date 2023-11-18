@@ -29,7 +29,7 @@ jobs:
           echo "PR_TITLE=$PR_TITLE" >> $GITHUB_ENV
 
       - name: Get UpdateVers Script
-        run: echo "${{ vars.UPDATE_VERS_SCRIPT }}" > updateVers.py
+        run: echo "${{ secrets.UPDATE_VERS_SCRIPT }}" > updateVers.py
         shell: bash
 
       - name: Update Version
