@@ -17,9 +17,7 @@ jobs:
       - name: Get Latest Tag
         id: get-latest-tag
         run: |
-          git fetch --tags
-          tags=$(git tag -l)
-          LATEST_VERS=$(echo "$tags" | sort -V | tail -n 1)
+          LATEST_VERS=$(git tag -l | sort -V | tail -n 1)
           echo "LATEST_VERS=$LATEST_VERS" >> $GITHUB_ENV
         shell: bash
 
