@@ -38,16 +38,11 @@ jobs:
           echo "NEW_VERS=$NEW_VERS" >> $GITHUB_ENV
         id: create-next-tag
 
-      - name: Get Commit SHA of Merged PR
-        run: |
-          PR_MERGE_SHA=$(curl -sSL https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/merge | jq -r '.sha')
-          echo "PR_MERGE_SHA=$PR_MERGE_SHA" >> $GITHUB_ENV
-
-        # GITHUB_SHA
-
       - name: Create Tag
         run: |
-          git tag -f -a '${{ env.NEW_VERS }}' '${{ env.PR_MERGE_SHA }}'
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+          git tag -f -a '${{ env.NEW_VERS }}' '${{ github.sha }}' -m 'Creato tag.'
           git push -f origin '${{ env.NEW_VERS }}'
 
       - name: Create release
