@@ -12,7 +12,7 @@ jobs:
     
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
       
       - name: Get latest tag
         uses: actions-ecosystem/action-get-latest-tag@v1
@@ -21,7 +21,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12'
+          python-version: '3.9'
 
       - name: Get PR title
         run: |
@@ -29,7 +29,7 @@ jobs:
           echo "PR_TITLE=$PR_TITLE" >> $GITHUB_ENV
 
       - name: Get UpdateVers Script
-        run: printf "%s" "${{ vars.UPDATE_VERS_SCRIPT }}" > updateVers.py
+        run: echo "${{ vars.UPDATE_VERS_SCRIPT }}" > updateVers.py
         shell: bash
 
       - name: Update Version
@@ -47,10 +47,10 @@ jobs:
 
       - name: Create Tag
         run: |
-          git tag -f -a '${{ env.NEW_VERS }}' '${{ env.PR_MERGE_SHA }}'
+          git tag -f -a '${{ env.NEW_VERS }}' '${{ github.sha }}'
           git push -f origin '${{ env.NEW_VERS }}'
 
-      - name: Create Release
+      - name: Create release
         uses: actions/create-release@v1
         with:
           tag_name: ${{ env.NEW_VERS }}
