@@ -29,8 +29,8 @@ jobs:
 
       - name: Update Version
         run: |
-          output=$(python updateVers.py ${{ steps.get-latest-tag.outputs.tag }})
-          echo "::set-output name=nexttag::$output"
+          NEW_VER=$(python updateVers.py ${{ steps.get-latest-tag.outputs.tag }})
+          echo "NEW_VER=$NEW_VER" >> $GITHUB_ENV
         id: create-next-tag
 
       - name: Get PR title
@@ -45,14 +45,14 @@ jobs:
 
       - name: Create Tag
         run: |
-          git tag -f -a ${{ steps.create-next-tag.outputs.nexttag }} $PR_MERGE_SHA
-          git push -f origin ${{ steps.create-next-tag.outputs.nexttag }}
+          git tag -f -a '${{ env.NEW_VER }}' '${{ env.PR_MERGE_SHA }}'
+          git push -f origin '$NEW_VER'
 
       - name: Create release
         uses: actions/create-release@v1
         with:
-          tag_name: ${{ steps.create-next-tag.outputs.nexttag }}
-          release_name: ${{ steps.create-next-tag.outputs.nexttag }}
+          tag_name: ${{ env.NEW_VER }}
+          release_name: ${{ env.NEW_VER }}
           body: ${{ env.PR_TITLE }}
           draft: false
         env:
