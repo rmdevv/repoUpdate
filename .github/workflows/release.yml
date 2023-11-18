@@ -1,4 +1,4 @@
-name: Create Release on PR
+name: Create Release on PR Merge
 
 on:
   pull_request:
@@ -21,7 +21,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: '3.12'
 
       - name: Get PR title
         run: |
@@ -47,7 +47,7 @@ jobs:
 
       - name: Create Tag
         run: |
-          git tag -f -a '${{ env.NEW_VERS }}' '${{ github.sha }}' -m 'Creato tag.'
+          git tag -f -a '${{ env.NEW_VERS }}' '${{ env.PR_MERGE_SHA }}'
           git push -f origin '${{ env.NEW_VERS }}'
 
       - name: Create release
