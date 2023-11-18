@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+      - run: git config --global user.email "action@github.com"
+      - run: git config --global user.name "auto-release"
       
       - name: Get latest tag
         uses: actions-ecosystem/action-get-latest-tag@v1
