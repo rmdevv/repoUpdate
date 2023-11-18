@@ -8,7 +8,7 @@ on:
 jobs:
   create-release:
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
     
     steps:
       - name: Checkout Repository
@@ -18,25 +18,42 @@ jobs:
         uses: actions-ecosystem/action-get-latest-tag@v1
         id: get-latest-tag
 
-      - name: Delete latest tag if PR is not merged
-        if: github.event.pull_request.merged == false
-        run: |
-          git tag -d '${{ steps.get-latest-tag.outputs.tag }}'
-          git push origin ':refs/tags/${{ steps.get-latest-tag.outputs.tag }}'
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
 
-      - name: Get tag message
-        if: github.event.pull_request.merged == true
+      - name: Get UpdateVers Script
+        run: echo "${{ secrets.UPDATE_VERS_SCRIPT }}" > updateVers.py
+        shell: bash
+
+      - name: Update Version
         run: |
-          TAG_MESSAGE=$(git tag -l --format='%(contents)' ${GITHUB_REF#refs/tags/})
-          echo "TAG_MESSAGE=$TAG_MESSAGE" >> $GITHUB_ENV
+          output=$(python updateVers.py ${{ steps.get-latest-tag.outputs.tag }})
+          echo "::set-output name=nexttag::$output"
+        id: create-next-tag
+
+      - name: Get PR title
+        run: |
+          PR_TITLE=$(curl -sSL https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }} | jq -r '.title')
+          echo "PR_TITLE=$PR_TITLE" >> $GITHUB_ENV
+
+      - name: Get Commit SHA of Merged PR
+        run: |
+          PR_MERGE_SHA=$(curl -sSL https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/merge | jq -r '.sha')
+          echo "PR_MERGE_SHA=$PR_MERGE_SHA" >> $GITHUB_ENV
+
+      - name: Create Tag
+        run: |
+          git tag -f -a ${{ steps.create-next-tag.outputs.nexttag }} $PR_MERGE_SHA
+          git push -f origin ${{ steps.create-next-tag.outputs.nexttag }}
 
       - name: Create release
-        if: github.event.pull_request.merged == true
         uses: actions/create-release@v1
         with:
-          tag_name: ${{ steps.get-latest-tag.outputs.tag }}
-          release_name: ${{ steps.get-latest-tag.outputs.tag }}
-          body: ${{ env.TAG_MESSAGE }}
+          tag_name: ${{ steps.create-next-tag.outputs.nexttag }}
+          release_name: ${{ steps.create-next-tag.outputs.nexttag }}
+          body: ${{ env.PR_TITLE }}
           draft: false
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
