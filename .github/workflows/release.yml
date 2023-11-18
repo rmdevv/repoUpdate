@@ -12,11 +12,15 @@ jobs:
     
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       
-      - name: Get latest tag
-        uses: actions-ecosystem/action-get-latest-tag@v1
+      - name: Get Latest Tag
         id: get-latest-tag
+        run: |
+          LATEST_TAG=$(git describe --tags --abbrev=0)
+          echo "Latest tag: $LATEST_TAG"
+          echo "LATEST_VERS=$LATEST_TAG" >> $GITHUB_ENV
+        shell: bash
 
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -34,11 +38,12 @@ jobs:
 
       - name: Update Version
         run: |
-          NEW_VERS=$(python updateVers.py '${{ steps.get-latest-tag.outputs.tag }}' '${{ env.PR_TITLE }}')
+          NEW_VERS=$(python updateVers.py '${{ env.LATEST_TAG }}' '${{ env.PR_TITLE }}')
           echo "NEW_VERS=$NEW_VERS" >> $GITHUB_ENV
         id: create-next-tag
 
       - name: Create Tag
+        if: ${{ env.NEW_VERS }} != ''
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
@@ -46,6 +51,7 @@ jobs:
           git push -f origin '${{ env.NEW_VERS }}'
 
       - name: Create release
+        if: ${{ env.NEW_VERS }} != ''
         uses: actions/create-release@v1
         with:
           tag_name: ${{ env.NEW_VERS }}
