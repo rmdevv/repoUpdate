@@ -1,0 +1,117 @@
+\documentclass[10pt, a4paper]{article}
+
+\input{parameters}
+
+\usepackage{style}
+\usepackage{headerfooter}
+
+\title{\data}
+\author{SWEetCode}
+
+\begin{document}
+
+% PRIMA PAGINA
+\include{firstpage}
+
+% INIZIO PAGINE
+\columnratio{0.31}
+\setlength{\columnsep}{2.2em}
+\setlength{\columnseprule}{4pt}
+\colseprulecolor{lightcol}
+\begin{paracol}{2}
+
+% 11111111111111111111111111111111111111111111111111111111111111111111111111111
+
+\intestazione
+\vspace{5.0em}
+
+\partecipanti
+
+\newpage
+
+\switchcolumn
+\revisioneAzioni
+\vspace{23.5em}
+
+\ordineGiorno
+
+\newpage
+
+% 22222222222222222222222222222222222222222222222222222222222222222222222222222
+
+\switchcolumn
+
+\heading{Discussione}\\
+\textbf{Sintesi degli argomenti\\discussi}
+
+~\newpage
+%~ \\\\\\\\\\\\\\\~
+
+\heading{Decisioni}\\
+\textbf{Decisioni prese durante\\la discussione}
+
+\switchcolumn
+
+\discussione
+Successivamente alla discussione, il gruppo ha deciso di iniziare subito con l'analisi dei requisiti, abbiamo scelto il sito che facesse al caso nostro, per realizzare i diagrammi dei Casi d'uso .
+
+L'azienda ha ribadito che il primo blocco di lavoro sarà di 6 settimane, entro le quali sarà richiesto un PoC (con scadenza entro il 2023-12-06), nel quale deve essere presente una solida Analisi dei requisiti. 
+
+Viene infine specificato che sarà richiesto di elaborare un'analisi dei costi di costruzione e di mantenimento del progetto.
+Inoltre abbiamo deciso di cambiare gli ambienti di lavoro, con \textit{framework} che fossero più adatti ai nostri scopi, come ad esempio passare da overleaf , per la stesura dei documenti , a Jira software o passare da Github per la repository dei documenti , a Vsual StudioCode .
+Infine, abbiamo deciso di studiare seriamente i casi d'uso , che l'azienda ci ha proposto .
+
+\vspace{12.5em}
+
+\decisioni
+
+\end{paracol}
+
+%\newpage
+\vspace{7em}
+\heading{Azioni da Intraprendere}
+
+{\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{c|X|c|c|c}
+\textbf{ID Issue} & \textbf{Azione} & \textbf{Incaricato} & \textbf{Revisore} & \textbf{Scadenza} \\
+\hline
+\#36 &
+Stesura verbale riunione &
+Orlandi G. &
+Campese M. &
+$2023-11-15$ \\
+\hline
+- &
+Lavorare su Analisi dei requisiti & 
+Ciriolo I. Orlandi G. &
+Campese M. &
+$2023-11-15$ \\
+\hline
+- &
+Automazione versioni documenti e aggiornamento norme di progetto &
+Team &
+Team &
+$2023-11-15$ \\
+\hline
+- &
+Iniziare Piano di Qualifica &
+Feltrin E. Orlandi G. &
+Campese M. &
+$2023-11-15$ \\
+\hline
+- &
+ &
+Feltrin E. &
+Campese M. &
+$2023-11-15$ \\
+\end{tabularx}}
+
+\vspace{3em}
+
+\heading{Altro}
+
+\textbf{Prossima Riunione}
+
+La prossima riunione con AzzurroDigitale è pianificata il 2023-11-22 alle 15:00 , per un approfondimento riguardo l'Analisi dei requisiti.
+
+\end{document}

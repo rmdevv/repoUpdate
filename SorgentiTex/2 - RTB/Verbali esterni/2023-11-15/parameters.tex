@@ -1,0 +1,85 @@
+% Parametri che modificano il file main.tex
+% Le uniche parti da cambiare su main.tex sono:
+% - vari \vspace tra sezioni
+% - tabella azioni da intraprendere
+% - sezione altro
+
+\def\data{2023-11-15}
+\def\oraInizio{15:00}
+\def\oraFine{16:00}
+\def\luogo{Piattaforma Google Meet}
+
+\def\tipoVerb{Esterno} % Interno - Esterno
+
+\def\nomeResp{Feltrin E.} % Cognome N.
+\def\nomeVer{Campese M.} % Cognome N.
+\def\nomeSegr{Orlandi G..} % Cognome N.
+
+\def\nomeAzienda{Azzurro Digitale}
+\def\firmaAzienda{azzurrodigitale.png}
+\def\firmaResp{emanuele.png} % nome Responsabile
+
+\def\listaPartInt{
+Bresolin G.,
+Campese M.,
+Ciriolo I.,
+Dugo A.,
+Feltrin E.,
+Michelon R.,
+Orlandi G.
+}
+
+\def\listaPartEst{
+\textit{Azzurro Digitale:},
+Caliendo G.,
+D'Avanzo C.}
+
+}
+
+\def\listaRevisioneAzioni {x}
+
+\def\listaOrdineGiorno {
+{Riunione con l'azienda AzzurroDigitale;},
+{L'azienda ci ha esposto i requisiti che deve avere il progetto e ci hanno fatto una breve introduzione per discutere in modo generale , cosa si aspettano il software debba saper fare;},
+{Possibilità di porre alcune domande generiche sul progetto ai referenti Caliendo G. e D'Avanzo C., con seguente approfondimento dei vari temi toccati.\\ .}
+}
+
+\def\listaDiscussioneInterna {
+{Discussione 1;},
+{Discussione 2;},
+}
+
+\newcommand{\domris}[2]{\textbf{#1}\\#2}
+
+\def\listaDiscussioneEsterna {
+\domris
+{In generale , quali sono i requisiti funzionali fondamentali che deve avere il sistema?
+}
+{L'azienda ci ha risposto , che certamente la ricezione in input e la gestione dei documenti , deve essere efficiente;
+},
+\domris
+{Quali sono le funzioni principali per il caricamento dei documenti?
+}
+{L'azienda ha detto che come minimo , il sistema dovrà essere capace di ricevere in input ed elaborare documenti Pdf e documenti Word;
+},
+\domris
+{I documenti caricati dovranno rimanere accessibili?
+}
+{L'azienda ci ha risposto che i documenti caricati potranno essere accessibili , ma che non serviranno grandi cose , basta un catalogo ;
+},
+\domris
+{Quali funzioni serviranno per eliminare i documenti? Il modello dovrà essere riaddestrato?
+}
+{L'azienda ci ha risposto che se un documento subisce modifiche , il sistema dovrà evolvere ed essere riaddestrato;
+},
+\domris
+{L'interazione tra l'utente e il chatbot , quali saranno i protocolli? 
+}
+{L'azienda ci ha risposto , che per quanto riguarda il comando vocale , da parte dei lavoratori non sarà fondamentale , ma che come minimo se un lavoratore chiede cose errate , il sistema dovrà dirglielo e che possa memorizzare una storia delle chat tra il lavoratore ed esso}.
+}
+} 
+
+
+
+
+\def\listaDecisioni {x}

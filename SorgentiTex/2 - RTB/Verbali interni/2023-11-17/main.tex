@@ -1,0 +1,103 @@
+\documentclass[10pt, a4paper]{article}
+
+\input{parameters}
+
+\usepackage{style}
+\usepackage{headerfooter}
+
+\title{\data}
+\author{SWEetCode}
+
+\begin{document}
+
+% PRIMA PAGINA
+\include{firstpage}
+
+% INIZIO PAGINE
+\setlength{\parindent}{0mm}
+\columnratio{0.31}
+\setlength{\columnsep}{2.2em}
+\setlength{\columnseprule}{4pt}
+\colseprulecolor{lightcol}
+\begin{paracol}{2}
+
+% 11111111111111111111111111111111111111111111111111111111111111111111111111111
+
+\intestazione
+\vspace{12em}
+
+\partecipanti
+
+\newpage
+
+\switchcolumn
+\revisioneAzioni
+\vspace{19.3em}
+
+\ordineGiorno
+
+\newpage
+
+% 22222222222222222222222222222222222222222222222222222222222222222222222222222
+
+\switchcolumn
+
+\heading{Discussione}\\
+\textbf{Sintesi degli argomenti\\discussi}
+
+\vspace{11.3cm}
+
+% \newpage
+% ~\newpage
+% ~ \\\\\\~
+
+\heading{Decisioni}\\
+\textbf{Decisioni prese durante\\la discussione}
+
+\switchcolumn
+
+\discussione
+
+\vspace{3em}
+
+\decisioni
+
+\end{paracol}
+
+\newpage
+
+\heading{Azioni da Intraprendere}
+
+{\renewcommand{\arraystretch}{1.5}
+\begin{xltabular}{\textwidth}{c|X|c|c|c}
+\label{tab:long}
+\textbf{ID Issue} & \textbf{Azione} & \textbf{Incaricato} & \textbf{Revisore} & \textbf{Scadenza} \\
+\endfirsthead
+\textbf{ID Issue} & \textbf{Azione} & \textbf{Incaricato} & \textbf{Revisore} & \textbf{Scadenza} \\
+\endhead
+\multicolumn{5}{r}{{Continua nella pagina successiva}} \\
+\endfoot
+\endlastfoot
+% Per ID Issue: vuoto se non l'abbiamo messa come issue, \#id_issue altrimenti
+\hline
+\#n & Stesura verbale riunione odierna & Ciriolo I. & Campese M. & $2023-11-19$ \\
+\hline
+\#n & Preparazione diapositive per diario di bordo del 2023-11-20 & Feltrin E. & Campese M. & $2023-11-19$ \\
+\hline
+\#n & Prosecuzione stesura Piano di progetto &  \quantities {Campese M.\\Ciriolo I.} & Dugo A. & $2023-11-24$ \\
+\hline
+\#n & Introduzione Piano di qualifica & Feltrin E. & Campese M. & $2023-11-24$ \\
+\hline
+\#n & Creazione di un account di \textit{Jira} per il team e impostazione dell'ambiente di sviluppo & \quantities{Bresolin G.\\ Dugo A.} & Team & $2023-11-19$ \\
+    
+\end{xltabular}}
+
+\vspace{3em}
+
+\heading{Altro}
+
+\textbf{Prossima Riunione}
+
+La prossima riunione interna si terrà in data 2023-11-18 alle 14:00; durante questa riunione si svolgerà il workshop tenuto dagli amministratori.
+
+\end{document}

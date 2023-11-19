@@ -22,10 +22,10 @@ jobs:
           echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
         shell: bash
 
-      - name: Get PR title
+      - name: Get Commit Messages
         run: |
-          PR_TITLE=$(curl -sSL https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }} | jq -r '.title')
-          echo "PR_TITLE=$PR_TITLE" >> $GITHUB_ENV
+          COMMIT_MESSAGES=$(git log --pretty=%B ${{ github.event.before }}..${{ github.sha }} | grep -v '^Merge pull request')
+          echo "COMMIT_MESSAGES=$COMMIT_MESSAGES" >> $GITHUB_ENV
 
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -38,7 +38,7 @@ jobs:
 
       - name: Update Version
         run: |
-          NEW_VERS=$(python updateVers.py '${{ env.LATEST_TAG }}' '${{ env.PR_TITLE }}')
+          NEW_VERS=$(python updateVers.py '${{ env.LATEST_TAG }}' '${{ env.COMMIT_MESSAGES }}')
           echo "NEW_VERS=$NEW_VERS" >> $GITHUB_ENV
         id: create-next-tag
 
